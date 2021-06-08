@@ -8,12 +8,14 @@ MyButton btn7=new MyButton();
 
 PImage temperature;
 PImage dissolvedOxygen;
+PImage pH;
 
 byte secondScreen =0;
 
 void setup() {
   temperature = loadImage("b45f8e4366b41a30994d6b5b3bb2d51b.png");
   dissolvedOxygen = loadImage("Растворенный кислород.png");
+  pH = loadImage("pH.png");
   background(0);
   fullScreen();
   button1(width/15, height/15+height/7, width/3-width/20, height/4, 255, 200, 0);
@@ -26,10 +28,7 @@ void setup() {
 }
 
 void draw() {
-  if (secondScreen==0) {
-    setupWindow();
-    writeData=111;
-  }
+  if (secondScreen==0)setupWindow();
   if (secondScreen==0)if (btn1.ButtonDraw()) button1();
   if (secondScreen==0)if (btn2.ButtonDraw()) button2();
   if (secondScreen==0)if (btn3.ButtonDraw()) button3();
@@ -42,7 +41,10 @@ void draw() {
   if (secondScreen==4)button4();
   if (secondScreen==5)button5();
   if (secondScreen==6)button6();
-  if (secondScreen==0) icons();
+  if (secondScreen==0) {
+    icons();
+    writeData=111;
+  }
 }
 void button1() {
   secondScreen=1;
