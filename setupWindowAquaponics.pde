@@ -38,8 +38,8 @@ void setupWindow() {
       thread("requestData");
     }
   }
-  text(received, width/2+width/6-width/70, height/7+height/100);
-  if (data.length()!=0)text(data, width/15, height/2+height/3);
+  if(received.split("!").length>1)text(received.split("!")[1], width/2+width/6-width/70, height/7+height/100);
+  if (data.length()!=0)text(data.split("N")[0], width/15, height/2+height/3);
   portTime=1;
   if (data.length()!=0)println(data);
 }
