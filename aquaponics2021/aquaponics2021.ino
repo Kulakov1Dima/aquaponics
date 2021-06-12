@@ -16,6 +16,8 @@ void loop() {
     DissolvedOxygen();
     pH();
     conductivity();
+    temperature();
+    pump();
     }
   }
 }
@@ -29,6 +31,14 @@ void pH(){
 }
 void conductivity(){
   Serial.print(analogRead(A2));
+  Serial.print("N");
+}
+void temperature(){
+  Serial.print(analogRead(A3));
+  Serial.print("N");
+}
+void pump(){
+  Serial.print(analogRead(A4));
   Serial.println("N");
 }
 void led(int time) {
