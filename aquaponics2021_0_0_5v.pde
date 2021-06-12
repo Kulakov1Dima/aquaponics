@@ -8,7 +8,6 @@ MyButton btn7=new MyButton();
 
 PImage temperature;
 PImage dissolvedOxygen;
-PImage pH;
 PImage Conductivity;
 PImage pump;
 PImage co2;
@@ -21,12 +20,10 @@ void setup() {
   //tint(255, 220);
   temperature = loadImage("b45f8e4366b41a30994d6b5b3bb2d51b.png");
   dissolvedOxygen = loadImage("Растворенный кислород.png");
-  pH = loadImage("pH.png");
   Conductivity=loadImage("Conductivity.png");
   pump =loadImage("Pump.png");
   co2 =loadImage("co2.png");
-  button1(width/15, height/15+height/7, width/3-width/20, height/4, 255, 200, 0);
-  button2(width/3+width/40, height/15+height/7, width/3-width/20, height/4, 230, 0, 0);
+ // button2(width/3+width/40, height/15+height/7, width/3-width/20, height/4, 230, 0, 0);
   button3(width/3+width/3-width/60, height/15+height/7, width/3-width/20, height/4, 0, 150, 0);
   button4(width/15, height/3-height/250+height/7, width/3-width/20, height/4, 150, 150, 150);
   button5(width/3+width/40, height/3-height/250+height/7, width/3-width/20, height/4, 56, 160, 205);
@@ -36,7 +33,7 @@ void setup() {
 
 void draw() {
   if (secondScreen==0)setupWindow();
-  if (secondScreen==0)if (btn1.ButtonDraw()) button1();
+  for (byte i=1; i<=2; i++)if (secondScreen==0)if (tiles((byte)i)) button(i);
   if (secondScreen==0)if (btn2.ButtonDraw()) button2();
   if (secondScreen==0)if (btn3.ButtonDraw()) button3();
   if (secondScreen==0)if (btn4.ButtonDraw()) button4();
@@ -52,6 +49,12 @@ void draw() {
     icons();
     writeData=111;
   }
+}
+void button(byte i) {
+  secondScreen=i;
+  if (i==1)background(255, 200, 10);
+  if (i==2)background(200, 0, 0);
+  if (btn7.ButtonDraw())secondScreen=0;
 }
 void button1() {
   secondScreen=1;

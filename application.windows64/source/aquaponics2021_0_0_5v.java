@@ -26,7 +26,6 @@ MyButton btn7=new MyButton();
 
 PImage temperature;
 PImage dissolvedOxygen;
-PImage pH;
 PImage Conductivity;
 PImage pump;
 PImage co2;
@@ -39,12 +38,10 @@ public void setup() {
   //tint(255, 220);
   temperature = loadImage("b45f8e4366b41a30994d6b5b3bb2d51b.png");
   dissolvedOxygen = loadImage("Растворенный кислород.png");
-  pH = loadImage("pH.png");
   Conductivity=loadImage("Conductivity.png");
   pump =loadImage("Pump.png");
   co2 =loadImage("co2.png");
-  button1(width/15, height/15+height/7, width/3-width/20, height/4, 255, 200, 0);
-  button2(width/3+width/40, height/15+height/7, width/3-width/20, height/4, 230, 0, 0);
+ // button2(width/3+width/40, height/15+height/7, width/3-width/20, height/4, 230, 0, 0);
   button3(width/3+width/3-width/60, height/15+height/7, width/3-width/20, height/4, 0, 150, 0);
   button4(width/15, height/3-height/250+height/7, width/3-width/20, height/4, 150, 150, 150);
   button5(width/3+width/40, height/3-height/250+height/7, width/3-width/20, height/4, 56, 160, 205);
@@ -54,7 +51,7 @@ public void setup() {
 
 public void draw() {
   if (secondScreen==0)setupWindow();
-  if (secondScreen==0)if (btn1.ButtonDraw()) button1();
+  for (byte i=1; i<=2; i++)if (secondScreen==0)if (tiles((byte)i)) button(i);
   if (secondScreen==0)if (btn2.ButtonDraw()) button2();
   if (secondScreen==0)if (btn3.ButtonDraw()) button3();
   if (secondScreen==0)if (btn4.ButtonDraw()) button4();
@@ -70,6 +67,12 @@ public void draw() {
     icons();
     writeData=111;
   }
+}
+public void button(byte i) {
+  secondScreen=i;
+  if (i==1)background(255, 200, 10);
+  if (i==2)background(200, 0, 0);
+  if (btn7.ButtonDraw())secondScreen=0;
 }
 public void button1() {
   secondScreen=1;
@@ -120,14 +123,7 @@ public void requestData() {
 public void icons() {
   textSize(width/50);
   fill(0);
-
-  image (dissolvedOxygen, width/14, height/4, width/10-width/200, height/7+height/50);
-  text("Dissolved Oxygen", width/6, height/4+height/200);
-  text("mg/L", width/4+width/25, height/3+height/25);
-
-  image (pH, width/2-width/8-width/110, height/4, width/10-width/170, height/7+height/50);
-  text("pH", width/2, height/4+height/200);
-
+  
   image(Conductivity, width/2+width/6, height/4-height/100, width/10-width/170, height/7+height/50);
   text("EC", width/2+width/3, height/4+height/200);
   text("uS", width/2+width/3+width/25, height/3+height/25);
@@ -257,6 +253,45 @@ text(label,x+lX,y+lY);
 return btnClicked;
 }}
 
+public boolean tiles(byte number) {
+  byte statusTiles=0;
+  if (mouseX > sizeTilesX(number) && mouseX < sizeTilesX(number) + sizeTilesW(number) && mouseY > sizeTilesY(number) && mouseY < sizeTilesY(number) + sizeTilesH(number))statusTiles=1;
+  else statusTiles=0;
+  text(statusTiles, width/15, height/2+height/3);
+  loadingTiles(number, statusTiles);
+  if (mousePressed && statusTiles==1) return true;
+  else return false;
+}
+
+public int sizeTilesX(byte number){
+  int i=0;
+  if(number==1)i=width/15;
+  if(number==2)i=width/3+width/40;
+  return i;
+}
+public int sizeTilesY(byte number){
+  int i=0;
+  if(number==1)i=height/15+height/7;
+  if(number==2)i=height/15+height/7;
+  return i;
+}
+public int sizeTilesW(byte number){
+  int i=0;
+  if(number==1)i=width/3-width/20;
+  if(number==2)i=width/3-width/20;
+  return i;
+}
+public int sizeTilesH(byte number){
+  int i=0;
+  if(number==1)i=height/4;
+  if(number==2)i=height/4;
+  return i;
+}
+
+public void loadingTiles(byte number, int statusTiles) {
+  image (loadImage("Tiles"+number+""+statusTiles+".png"), sizeTilesX(number), sizeTilesY(number));
+}
+
 Serial serial;
 
 String[] port;
@@ -297,7 +332,7 @@ public void setupWindow() {
     }
   }
   if(received.split("!").length>1)text(received.split("!")[1], width/2+width/6-width/70, height/7+height/100);
-  if (data.length()!=0)text(data.split("N")[0], width/15, height/2+height/3);
+  //if (data.length()!=0)text(data.split("N")[0], width/15, height/2+height/3);
   portTime=1;
   if (data.length()!=0)println(data);
 }
