@@ -34,14 +34,15 @@ PImage co2;
 byte secondScreen =0;
 
 public void setup() {
+  
+  background(0);
+  //tint(255, 220);
   temperature = loadImage("b45f8e4366b41a30994d6b5b3bb2d51b.png");
   dissolvedOxygen = loadImage("Растворенный кислород.png");
   pH = loadImage("pH.png");
   Conductivity=loadImage("Conductivity.png");
   pump =loadImage("Pump.png");
   co2 =loadImage("co2.png");
-  background(0);
-  
   button1(width/15, height/15+height/7, width/3-width/20, height/4, 255, 200, 0);
   button2(width/3+width/40, height/15+height/7, width/3-width/20, height/4, 230, 0, 0);
   button3(width/3+width/3-width/60, height/15+height/7, width/3-width/20, height/4, 0, 150, 0);
@@ -138,7 +139,7 @@ public void icons() {
   image (pump, width/2-width/8-width/110, height/2+height/40, width/10, height/7);
   text("Pump", width/2, height/2+height/70);
   text("ml", width/2+width/10, height/2+height/8);
-  
+
   image(co2, width/2+width/7+width/150, height/3+height/6-height/150, width/9-width/200, height/7+height/20);
   text("CO2", width/2+width/3, height/2+height/70);
   text("ppm", width/2+width/3+width/25, height/2+height/8);
@@ -150,6 +151,7 @@ public void icons() {
     if (data.split("N").length>3)text(data.split("N")[3], width/2+width/4+width/50, height/3+height/25);
     if (data.split("N").length>4)text(data.split("N")[4], width/5-width/200, height/2+height/8);
     if (data.split("N").length>5)text(data.split("N")[5], width/2-width/100, height/2+height/8);
+    if (data.split("N").length>6)text(data.split("N")[6], width/2+width/4+width/50, height/2+height/8);
   }
 }
 public void button1(float x,float y,float w,float h,int r,int g,int b){
@@ -240,9 +242,7 @@ rect(x+3,y+5,w+3,h+3,u);
 stroke(1);
 
 if (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h) {
-
 fill(btnRollOver);
-
 if (mousePressed){btnClicked=true; }
 else {btnClicked=false;}
 

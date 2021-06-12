@@ -16,14 +16,15 @@ PImage co2;
 byte secondScreen =0;
 
 void setup() {
+  fullScreen();
+  background(0);
+  //tint(255, 220);
   temperature = loadImage("b45f8e4366b41a30994d6b5b3bb2d51b.png");
   dissolvedOxygen = loadImage("Растворенный кислород.png");
   pH = loadImage("pH.png");
   Conductivity=loadImage("Conductivity.png");
   pump =loadImage("Pump.png");
   co2 =loadImage("co2.png");
-  background(0);
-  fullScreen();
   button1(width/15, height/15+height/7, width/3-width/20, height/4, 255, 200, 0);
   button2(width/3+width/40, height/15+height/7, width/3-width/20, height/4, 230, 0, 0);
   button3(width/3+width/3-width/60, height/15+height/7, width/3-width/20, height/4, 0, 150, 0);

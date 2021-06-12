@@ -86,9 +86,7 @@ rect(x+3,y+5,w+3,h+3,u);
 stroke(1);
 
 if (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h) {
-
 fill(btnRollOver);
-
 if (mousePressed){btnClicked=true; }
 else {btnClicked=false;}
 

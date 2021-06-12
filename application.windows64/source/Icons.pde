@@ -20,7 +20,7 @@ void icons() {
   image (pump, width/2-width/8-width/110, height/2+height/40, width/10, height/7);
   text("Pump", width/2, height/2+height/70);
   text("ml", width/2+width/10, height/2+height/8);
-  
+
   image(co2, width/2+width/7+width/150, height/3+height/6-height/150, width/9-width/200, height/7+height/20);
   text("CO2", width/2+width/3, height/2+height/70);
   text("ppm", width/2+width/3+width/25, height/2+height/8);
@@ -32,5 +32,6 @@ void icons() {
     if (data.split("N").length>3)text(data.split("N")[3], width/2+width/4+width/50, height/3+height/25);
     if (data.split("N").length>4)text(data.split("N")[4], width/5-width/200, height/2+height/8);
     if (data.split("N").length>5)text(data.split("N")[5], width/2-width/100, height/2+height/8);
+    if (data.split("N").length>6)text(data.split("N")[6], width/2+width/4+width/50, height/2+height/8);
   }
 }
