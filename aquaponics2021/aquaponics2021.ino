@@ -18,6 +18,7 @@ void loop() {
     conductivity();
     temperature();
     pump();
+    co2();
     }
   }
 }
@@ -39,6 +40,10 @@ void temperature(){
 }
 void pump(){
   Serial.print(analogRead(A4));
+  Serial.print("N");
+}
+void co2(){
+  Serial.print(analogRead(A5));
   Serial.println("N");
 }
 void led(int time) {
