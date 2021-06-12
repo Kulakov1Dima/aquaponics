@@ -12,7 +12,7 @@ void button2(float x,float y,float w,float h,int r,int g,int b){
   btn2.w=w;
   btn2.h=h;
   btn2.btnColor=color(r,g,b);
-  btn2.btnRollOver=color(r+20,g+20,b+20);
+  btn2.btnRollOver=color(r+30,g+20,b+20);
 }
 void button3(float x,float y,float w,float h,int r,int g,int b){
   btn3.x=x;
@@ -100,9 +100,5 @@ rect(x,y,w,h,u);
 fill(txColor);
 textSize(ts);
 text(label,x+lX,y+lY);
-
 return btnClicked;
-
-}
-
-}
+}}

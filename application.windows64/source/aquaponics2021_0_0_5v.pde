@@ -10,6 +10,8 @@ PImage temperature;
 PImage dissolvedOxygen;
 PImage pH;
 PImage Conductivity;
+PImage pump;
+PImage co2;
 
 byte secondScreen =0;
 
@@ -18,14 +20,16 @@ void setup() {
   dissolvedOxygen = loadImage("Растворенный кислород.png");
   pH = loadImage("pH.png");
   Conductivity=loadImage("Conductivity.png");
+  pump =loadImage("Pump.png");
+  co2 =loadImage("co2.png");
   background(0);
   fullScreen();
   button1(width/15, height/15+height/7, width/3-width/20, height/4, 255, 200, 0);
-  button2(width/3+width/40, height/15+height/7, width/3-width/20, height/4, 200, 0, 0);
-  button3(width/3+width/3-width/60, height/15+height/7, width/3-width/20, height/4, 0, 100, 0);
+  button2(width/3+width/40, height/15+height/7, width/3-width/20, height/4, 230, 0, 0);
+  button3(width/3+width/3-width/60, height/15+height/7, width/3-width/20, height/4, 0, 150, 0);
   button4(width/15, height/3-height/250+height/7, width/3-width/20, height/4, 150, 150, 150);
   button5(width/3+width/40, height/3-height/250+height/7, width/3-width/20, height/4, 56, 160, 205);
-  button6(width/3+width/3-width/60, height/3-height/250+height/7, width/3-width/20, height/4, 255, 100, 0);
+  button6(width/3+width/3-width/60, height/3-height/250+height/7, width/3-width/20, height/4, 255, 120, 0);
   button7(0, 0, width/20, height/20, 0, 0, 0, " <");
 }
 

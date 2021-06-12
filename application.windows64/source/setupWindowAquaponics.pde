@@ -15,7 +15,7 @@ String scanPonics() {
 }
 
 void setupWindow() {
-  background(0);
+  background(100);
   fill(255);
   textSize(width/80);
   text("для выхода нажмите Esc", width/2+width/4+width/35, height/2+height/3+height/10);
