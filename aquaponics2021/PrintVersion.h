@@ -5,7 +5,7 @@ void printVersionF() {
 }
 
 void printFirmwareVersion() {
-  Serial.print("Date of last update of the firmware version: ");
+  Serial.print("Date version: ");
   Serial.print(dat);
   Serial.print("N");
 }
