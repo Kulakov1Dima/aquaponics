@@ -20,12 +20,28 @@ byte secondScreen = 0;
 boolean theme;
 boolean n;
 PImage transparency;
+PImage pump1;
+PImage pump2;
+PImage pump3;
+PImage pump4;
+PImage pump5;
+PImage pump6;
+PImage pump7;
+PImage pump8;
 
 String data="no data available";
 
 
 public void setup() {
   transparency=loadImage("transparency.png");
+  pump1=loadImage("Pump1.png");
+  pump2=loadImage("Pump2.png");
+  pump3=loadImage("Pump3.png");
+  pump4=loadImage("Pump4.png");
+  pump5=loadImage("Pump5.png");
+  pump6=loadImage("Pump6.png");
+  pump7=loadImage("Pump7.png");
+  pump8=loadImage("Pump8.png");
   
   background(0);
 }
@@ -37,7 +53,9 @@ public void TileGraphics() {
   if (secondScreen==0) {
     setupWindow();
   }
-  for (byte i=1; i<=8; i++)if (secondScreen==0)if (i!=7)if (tiles((byte)i))secondScreen=i;
+  pump(secondScreen);
+  for (byte i=1; i<=12; i++)if (secondScreen==0)if (i!=7)if (tiles((byte)i))secondScreen=i;
+
   if (secondScreen==0) { 
     if (loadStrings("configuration.txt")[1].equals("darkTheme")) {
       fill(0);
@@ -45,8 +63,8 @@ public void TileGraphics() {
     if (loadStrings("configuration.txt")[1].equals("lightTheme")) {
       fill(255);
     }
-    icons();
   }
+  if (secondScreen==0)icons();
   definingWindows();
 }
 
@@ -57,7 +75,7 @@ public void definingWindows() {
   if (secondScreen==4)background(150, 150, 150);
   if (secondScreen==5)background(56, 160, 205);
   if (secondScreen==6)background(255, 100, 0);
-  if (secondScreen!=0 && secondScreen!=8)if (tiles((byte)7))secondScreen=0;
+  if (secondScreen!=0 && secondScreen!=8 && secondScreen!=9 && secondScreen!=10 && secondScreen!=11 && secondScreen!=12)if (tiles((byte)7))secondScreen=0;
   if (secondScreen==8)panelSettings();
 }
 
@@ -89,11 +107,17 @@ public void requestData() {
     if (data.split("N").length>2)text(data.split("N")[2], width/2-width/100, height/3+height/25);
     if (data.split("N").length>3)text(data.split("N")[3], width/2+width/4+width/50, height/3+height/25);
     if (data.split("N").length>4)text(data.split("N")[4], width/5-width/200, height/2+height/8);
-    if (data.split("N").length>5)text(data.split("N")[5], width/2-width/100, height/2+height/8);
-    if (data.split("N").length>6)text(data.split("N")[6], width/2+width/4+width/50, height/2+height/8);
+    if (data.split("N").length>5)text(data.split("N")[5], width/2-width/80, height/2+height/11);
+    if (data.split("N").length>6)text(data.split("N")[6], width/2-width/80, height/2+height/6);
+    if (data.split("N").length>7)text(data.split("N")[7], width/2+width/4+width/50, height/2+height/8);
   }
 }
 byte statusTiles;
+byte modePump1=100;
+boolean Pump1=true;
+boolean Pump2=true;
+boolean Pump3=true;
+boolean Pump4=true;
 public boolean tiles(byte number) {
   if (mouseX > sizeTilesX(number) && mouseX < sizeTilesX(number) + sizeTilesW(number) && mouseY > sizeTilesY(number) && mouseY < sizeTilesY(number) + sizeTilesH(number))statusTiles=1;
   else statusTiles=0;
@@ -113,6 +137,10 @@ public int sizeTilesX(byte number) {
   if (number==6)i=width/3+width/3-width/60;
   if (number==7)i=0;
   if (number==8)i=width/15;
+  if (number==9)i=width/3+width/40;
+  if (number==10)i=width/2+width/300;
+  if (number==11)i=width/3+width/3-width/60;
+  if (number==12)i=width/2+width/4+width/22;
   return i;
 }
 public int sizeTilesY(byte number) {
@@ -125,6 +153,10 @@ public int sizeTilesY(byte number) {
   if (number==6)i=height/3-height/250+height/7;
   if (number==7)i=0;
   if (number==8)i=height/2+height/4-height/80;
+  if (number==9) i=height/2+height/4-height/80;
+  if (number==10) i=height/2+height/4-height/80;
+  if (number==11) i=height/2+height/4-height/80;
+  if (number==12) i=height/2+height/4-height/80;
   return i;
 }
 public int sizeTilesW(byte number) {
@@ -133,6 +165,10 @@ public int sizeTilesW(byte number) {
   else {
     i=width/3-width/20;
     if (number==8)i=width/2-width/3-width/45;
+    if (number==9)i=width/2-width/3-width/35;
+    if (number==10)i=width/2-width/3-width/35;
+    if (number==11)i=width/2-width/3-width/35;
+    if (number==12)i=width/2-width/3-width/35;
   }
   return i;
 }
@@ -142,6 +178,10 @@ public int sizeTilesH(byte number) {
   else {
     i=height/4;
     if (number==8)i=height/9;
+    if (number==9)i=height/9;
+    if (number==10)i=height/9;
+    if (number==11)i=height/9;
+    if (number==12)i=height/9;
   }
   return i;
 }
@@ -151,18 +191,59 @@ public void loadingTiles(byte number, int statusTiles) {
     if (number==7)tint(255, 220);
     else tint(255, 255);
   }
-  if (loadStrings("configuration.txt")[1].equals("darkTheme"))image (loadImage("Tiles"+number+""+statusTiles+".png"), sizeTilesX(number), sizeTilesY(number), sizeTilesW(number), sizeTilesH(number));
+  if (loadStrings("configuration.txt")[1].equals("darkTheme")) if (number!=9&&number!=10&&number!=11&&number!=12)image (loadImage("Tiles"+number+""+statusTiles+".png"), sizeTilesX(number), sizeTilesY(number), sizeTilesW(number), sizeTilesH(number));
   if (loadStrings("configuration.txt")[1].equals("lightTheme")) {
-    if (statusTiles==1)tint(255, 100);
-    else tint(255, 200);
-    image (loadImage("Tiles"+number+".png"), sizeTilesX(number), sizeTilesY(number), sizeTilesW(number), sizeTilesH(number));
+    if (statusTiles==1)tint(255, 190);
+    else tint(255, 220);
+    if (number!=9&&number!=10&&number!=11&&number!=12)image (loadImage("Tiles"+number+".png"), sizeTilesX(number), sizeTilesY(number), sizeTilesW(number), sizeTilesH(number));
   }
+}
+
+public void pump(byte mode) {
+  if (mode!=modePump1) {
+    if (mode==9) {
+      Pump1=!Pump1;
+    }
+    if (mode==10) {
+      Pump2=!Pump2;
+    }
+    if (mode==11) {
+      Pump3=!Pump3;
+    }
+    if (mode==12) {
+      Pump4=!Pump4;
+    }
+  }
+  if (!mousePressed&& modePump1==9)secondScreen=0;
+  else modePump1=mode;
+  if (statusTiles==1)tint(255, 230);
+  else tint(255, 250);
+  if (Pump1)image(pump1, sizeTilesX((byte)9), sizeTilesY((byte)9), sizeTilesW((byte)9), sizeTilesH((byte)9));
+  else image(pump2, sizeTilesX((byte)9), sizeTilesY((byte)9), sizeTilesW((byte)9), sizeTilesH((byte)9));
+  if (!mousePressed&& modePump1==10)secondScreen=0;
+  else modePump1=mode;
+  if (statusTiles==1)tint(255, 230);
+  else tint(255, 250);
+  if (Pump2)image(pump3, sizeTilesX((byte)10), sizeTilesY((byte)10), sizeTilesW((byte)10), sizeTilesH((byte)10));
+  else image(pump4, sizeTilesX((byte)10), sizeTilesY((byte)10), sizeTilesW((byte)10), sizeTilesH((byte)10));
+  if (!mousePressed&& modePump1==11)secondScreen=0;
+  else modePump1=mode;
+  if (statusTiles==1)tint(255, 230);
+  else tint(255, 250);
+  if (Pump3)image(pump5, sizeTilesX((byte)11), sizeTilesY((byte)11), sizeTilesW((byte)11), sizeTilesH((byte)11));
+  else image(pump6, sizeTilesX((byte)11), sizeTilesY((byte)11), sizeTilesW((byte)11), sizeTilesH((byte)11));
+  if (!mousePressed&& modePump1==12)secondScreen=0;
+  else modePump1=mode;
+  if (statusTiles==1)tint(255, 230);
+  else tint(255, 250);
+  if (Pump4)image(pump7, sizeTilesX((byte)12), sizeTilesY((byte)12), sizeTilesW((byte)12), sizeTilesH((byte)12));
+  else image(pump8, sizeTilesX((byte)12), sizeTilesY((byte)12), sizeTilesW((byte)12), sizeTilesH((byte)12));
 }
 PrintWriter output;
 String[] textLines;
 int i=0;
 int k=0;
-boolean drawButton=false;
+
 public void setupWindow() {
   if (loadStrings("configuration.txt")[1].equals("darkTheme")) {
     background(0);
@@ -177,14 +258,13 @@ public void setupWindow() {
   if (portTime==0)if (port.length!=0) {
     serial = new Serial(this, scanPonics(), 9600);
     delay(1500);
-
-    //while( serial.available()==0)serial.write("ok");
+    while ( serial.available()==0)serial.write("ok");
     if ( serial.available() > 0) {
       received = serial.readStringUntil('\n');
       writeData=111;
       thread("requestData");
     }
-    if (received.split("!").length>1)text(received.split("!")[1], width/2+width/6-width/70, height/7+height/100);
+    //if (received.split("!").length>1)text(received.split("!")[1], width/2+width/6-width/70, height/7+height/100);
     //if (data.length()!=0)text(data.split("N")[0], width/15, height/2+height/3);
     portTime=1;
     if (data.length()!=0)println(data);
@@ -196,18 +276,18 @@ public void setupWindow() {
   if (loadStrings("configuration.txt")[1].equals("lightTheme"))fill(20, 160, 30);
   text("Zero", width/2+width/3+width/75, height/10);
   textSize(width/42);
-  text("Имя порта вашего устройства:", width/15, height/10);
+  text("Номер порта", width/15, height/10);
 }
 
 public void panelSettings() {
   i+=2;
   if (loadStrings("configuration.txt")[0].equals("transparencyON")) {
     tint(255, 40);
-    if (i<22 && secondScreen!=0)image (loadImage("rightPanel.png"), 0, 0, width/3+width/100, height);
+    if (i<22 && secondScreen!=0)image (loadImage("rightPanel.png"), 0, 0, width/3, height);
     else exitSettings();
   } else { 
     tint(255, 255);
-    image (loadImage("rightPanel.png"), 0, 0, width/3+width/100, height);
+    image (loadImage("rightPanel.png"), 0, 0, width/3, height);
     exitSettings();
   }
   if (loadStrings("configuration.txt")[0].equals("transparencyOFF"))buttonSettings(); 
@@ -285,7 +365,7 @@ public void rectStatus() {
   for (int h=0; h<=600; h+=width/15-width/350)rect(width/5+width/35, height/6+height/300+h, width/15, height/30, 15);
 }
 public void exitSettings() {
-  if (mouseX>=width/3-width/30 && mouseX<=width/3+width/22) {
+  if (mouseY<=height/10 && mouseX<=width/20) {
     fill(0);
     stroke(100);
     if (mousePressed) {
@@ -300,10 +380,11 @@ public void exitSettings() {
     stroke(0);
   }
   if (secondScreen!=0) {
-    rect(width/3-width/30, 0, width/22-1, height);
+    stroke(150);
+    rect(0, 0, width/20, height/10);
     fill(255);
     textSize(height/30);
-    text("<", width/3-width/50, height/2);
+    text("<", width/90, height/20);
   }
 }
   public void settings() {  fullScreen(); }

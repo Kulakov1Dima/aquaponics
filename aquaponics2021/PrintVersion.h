@@ -1,5 +1,6 @@
 void printVersionF() {
   Serial.begin(9600);
+  delay(10);
   Serial.print("!Firmware version ");
   Serial.println(version);
 }

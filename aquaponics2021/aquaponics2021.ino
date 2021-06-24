@@ -6,6 +6,7 @@ long delayTime = 0;
 void setup() {
   pinMode(13, OUTPUT);
   printVersionF();
+  Serial.print("l");
 }
 
 void loop() {
@@ -17,7 +18,8 @@ void loop() {
     pH();
     conductivity();
     temperature();
-    pump();
+    pump1();
+    pump2();
     co2();
     }
   }
@@ -38,12 +40,16 @@ void temperature(){
   Serial.print(analogRead(A3));
   Serial.print("N");
 }
-void pump(){
+void pump1(){
   Serial.print(analogRead(A4));
   Serial.print("N");
 }
-void co2(){
+void pump2(){
   Serial.print(analogRead(A5));
+  Serial.print("N");
+}
+void co2(){
+  Serial.print(analogRead(A6));
   Serial.println("N");
 }
 void led(int time) {

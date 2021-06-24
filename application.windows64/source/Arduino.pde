@@ -27,7 +27,8 @@ void requestData() {
     if (data.split("N").length>2)text(data.split("N")[2], width/2-width/100, height/3+height/25);
     if (data.split("N").length>3)text(data.split("N")[3], width/2+width/4+width/50, height/3+height/25);
     if (data.split("N").length>4)text(data.split("N")[4], width/5-width/200, height/2+height/8);
-    if (data.split("N").length>5)text(data.split("N")[5], width/2-width/100, height/2+height/8);
-    if (data.split("N").length>6)text(data.split("N")[6], width/2+width/4+width/50, height/2+height/8);
+    if (data.split("N").length>5)text(data.split("N")[5], width/2-width/80, height/2+height/11);
+    if (data.split("N").length>6)text(data.split("N")[6], width/2-width/80, height/2+height/6);
+    if (data.split("N").length>7)text(data.split("N")[7], width/2+width/4+width/50, height/2+height/8);
   }
 }

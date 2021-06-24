@@ -2,7 +2,7 @@ PrintWriter output;
 String[] textLines;
 int i=0;
 int k=0;
-boolean drawButton=false;
+
 void setupWindow() {
   if (loadStrings("configuration.txt")[1].equals("darkTheme")) {
     background(0);
@@ -17,14 +17,13 @@ void setupWindow() {
   if (portTime==0)if (port.length!=0) {
     serial = new Serial(this, scanPonics(), 9600);
     delay(1500);
-
-    //while( serial.available()==0)serial.write("ok");
+    while ( serial.available()==0)serial.write("ok");
     if ( serial.available() > 0) {
       received = serial.readStringUntil('\n');
       writeData=111;
       thread("requestData");
     }
-    if (received.split("!").length>1)text(received.split("!")[1], width/2+width/6-width/70, height/7+height/100);
+    //if (received.split("!").length>1)text(received.split("!")[1], width/2+width/6-width/70, height/7+height/100);
     //if (data.length()!=0)text(data.split("N")[0], width/15, height/2+height/3);
     portTime=1;
     if (data.length()!=0)println(data);
@@ -36,18 +35,18 @@ void setupWindow() {
   if (loadStrings("configuration.txt")[1].equals("lightTheme"))fill(20, 160, 30);
   text("Zero", width/2+width/3+width/75, height/10);
   textSize(width/42);
-  text("Имя порта вашего устройства:", width/15, height/10);
+  text("Номер порта", width/15, height/10);
 }
 
 void panelSettings() {
   i+=2;
   if (loadStrings("configuration.txt")[0].equals("transparencyON")) {
     tint(255, 40);
-    if (i<22 && secondScreen!=0)image (loadImage("rightPanel.png"), 0, 0, width/3+width/100, height);
+    if (i<22 && secondScreen!=0)image (loadImage("rightPanel.png"), 0, 0, width/3, height);
     else exitSettings();
   } else { 
     tint(255, 255);
-    image (loadImage("rightPanel.png"), 0, 0, width/3+width/100, height);
+    image (loadImage("rightPanel.png"), 0, 0, width/3, height);
     exitSettings();
   }
   if (loadStrings("configuration.txt")[0].equals("transparencyOFF"))buttonSettings(); 
@@ -125,7 +124,7 @@ void rectStatus() {
   for (int h=0; h<=600; h+=width/15-width/350)rect(width/5+width/35, height/6+height/300+h, width/15, height/30, 15);
 }
 void exitSettings() {
-  if (mouseX>=width/3-width/30 && mouseX<=width/3+width/22) {
+  if (mouseY<=height/10 && mouseX<=width/20) {
     fill(0);
     stroke(100);
     if (mousePressed) {
@@ -140,9 +139,10 @@ void exitSettings() {
     stroke(0);
   }
   if (secondScreen!=0) {
-    rect(width/3-width/30, 0, width/22-1, height);
+    stroke(150);
+    rect(0, 0, width/20, height/10);
     fill(255);
     textSize(height/30);
-    text("<", width/3-width/50, height/2);
+    text("<", width/90, height/20);
   }
 }
