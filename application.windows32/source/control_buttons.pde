@@ -9,7 +9,7 @@ void controllButtons() {
           pump[x-8]=!pump[x-8];
           if (pump[x-8])writeData="M1"+(x-7);
           else writeData="M0"+(x-7);
-          for(int v=0; v<=3;v++){
+          for(int v=0; v<=5;v++){
             serial.write(writeData);
             delay(2);
           }
@@ -17,5 +17,6 @@ void controllButtons() {
         }
       }
     }
+    delay(1);
   }
 }

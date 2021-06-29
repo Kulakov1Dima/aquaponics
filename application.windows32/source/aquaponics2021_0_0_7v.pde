@@ -18,6 +18,5 @@ void setup() {
 void draw() {
   println(data);
   setupWindow();
-
   definingWindows();
 }

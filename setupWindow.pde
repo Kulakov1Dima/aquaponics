@@ -63,8 +63,8 @@ void  windowEffects() {
 
 void tiles() {
   for (byte x=1; x<13; x++) {
-    if (mouseX>sizeTilesX(x)&&mouseY>sizeTilesY(x)&&mouseX<sizeTilesW(x)+sizeTilesX(x)&&mouseY<sizeTilesH(x)+sizeTilesY(x))tileTransparency=180;
-    else tileTransparency=255;
+    if (mouseX>sizeTilesX(x)&&mouseY>sizeTilesY(x)&&mouseX<sizeTilesW(x)+sizeTilesX(x)&&mouseY<sizeTilesH(x)+sizeTilesY(x))tileTransparency=170;
+    else tileTransparency=225;
     if (!startWindow)tint(255, tileTransparency);
     if (secondScreen==0&& x!=12) if (load.equals("lightTheme"))image(Ltiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
     else image(tiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));

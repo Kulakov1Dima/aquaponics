@@ -2,10 +2,11 @@ void clickingTile() {
   while (true) {
     for (byte x=1; x<8; x++) {
       if (secondScreen==0)if (mouseX>sizeTilesX(x)&&mouseY>sizeTilesY(x)&&mouseX<sizeTilesW(x)+sizeTilesX(x)&&mouseY<sizeTilesH(x)+sizeTilesY(x)&&mousePressed)secondScreen=x;
-      if (secondScreen!=0)if(secondScreen!=7)if (mouseX>sizeTilesX((byte)12)&&mouseY>sizeTilesY((byte)12)&&mouseX<sizeTilesW((byte)12)+sizeTilesX((byte)12)&&mouseY<sizeTilesH((byte)12)+sizeTilesY((byte)12)&&mousePressed)
+      if (secondScreen!=0)if (secondScreen!=7)if (mouseX>sizeTilesX((byte)12)&&mouseY>sizeTilesY((byte)12)&&mouseX<sizeTilesW((byte)12)+sizeTilesX((byte)12)&&mouseY<sizeTilesH((byte)12)+sizeTilesY((byte)12)&&mousePressed)
         if (loadStrings("configuration.txt")[0].equals("transparencyON"))secondScreen=12;
         else secondScreen=0;
     }
+    delay(2);
   }
 }
 void definingWindows() { 

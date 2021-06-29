@@ -36,7 +36,6 @@ public void setup() {
 public void draw() {
   println(data);
   setupWindow();
-
   definingWindows();
 }
 public int sizeTilesX(byte number) {
@@ -101,10 +100,11 @@ public void clickingTile() {
   while (true) {
     for (byte x=1; x<8; x++) {
       if (secondScreen==0)if (mouseX>sizeTilesX(x)&&mouseY>sizeTilesY(x)&&mouseX<sizeTilesW(x)+sizeTilesX(x)&&mouseY<sizeTilesH(x)+sizeTilesY(x)&&mousePressed)secondScreen=x;
-      if (secondScreen!=0)if(secondScreen!=7)if (mouseX>sizeTilesX((byte)12)&&mouseY>sizeTilesY((byte)12)&&mouseX<sizeTilesW((byte)12)+sizeTilesX((byte)12)&&mouseY<sizeTilesH((byte)12)+sizeTilesY((byte)12)&&mousePressed)
+      if (secondScreen!=0)if (secondScreen!=7)if (mouseX>sizeTilesX((byte)12)&&mouseY>sizeTilesY((byte)12)&&mouseX<sizeTilesW((byte)12)+sizeTilesX((byte)12)&&mouseY<sizeTilesH((byte)12)+sizeTilesY((byte)12)&&mousePressed)
         if (loadStrings("configuration.txt")[0].equals("transparencyON"))secondScreen=12;
         else secondScreen=0;
     }
+    delay(2);
   }
 }
 public void definingWindows() { 
@@ -144,7 +144,7 @@ public void controllButtons() {
           pump[x-8]=!pump[x-8];
           if (pump[x-8])writeData="M1"+(x-7);
           else writeData="M0"+(x-7);
-          for(int v=0; v<=3;v++){
+          for(int v=0; v<=5;v++){
             serial.write(writeData);
             delay(2);
           }
@@ -152,6 +152,7 @@ public void controllButtons() {
         }
       }
     }
+    delay(1);
   }
 }
 PImage darkSetupWindow;
@@ -192,7 +193,7 @@ public void rx() {
     if ( serial.available() > 0)received = serial.readStringUntil('\n');
     if (received != null)if (received.replaceAll(" ", "") != "") {
       data =received.replaceAll("\n", "");
-      serial.clear();
+      delay(1);
     }
   }
 }
@@ -200,10 +201,7 @@ public void rx() {
 public void tx() {
   while (true) {
     serial.write(writeData);
-    delay(500);
-    serial.clear();
-    delay(500);
-    ;
+    delay(1200);
   }
 }
 boolean startWindow = true;
@@ -271,8 +269,8 @@ public void  windowEffects() {
 
 public void tiles() {
   for (byte x=1; x<13; x++) {
-    if (mouseX>sizeTilesX(x)&&mouseY>sizeTilesY(x)&&mouseX<sizeTilesW(x)+sizeTilesX(x)&&mouseY<sizeTilesH(x)+sizeTilesY(x))tileTransparency=180;
-    else tileTransparency=255;
+    if (mouseX>sizeTilesX(x)&&mouseY>sizeTilesY(x)&&mouseX<sizeTilesW(x)+sizeTilesX(x)&&mouseY<sizeTilesH(x)+sizeTilesY(x))tileTransparency=170;
+    else tileTransparency=225;
     if (!startWindow)tint(255, tileTransparency);
     if (secondScreen==0&& x!=12) if (load.equals("lightTheme"))image(Ltiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
     else image(tiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
@@ -409,7 +407,7 @@ public void icons() {
 }
   public void settings() {  fullScreen(); }
   static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "--present", "--window-color=#666666", "--hide-stop", "aquaponics2021_0_0_7v" };
+    String[] appletArgs = new String[] { "--present", "--window-color=#666666", "--stop-color=#cccccc", "aquaponics2021_0_0_7v" };
     if (passedArgs != null) {
       PApplet.main(concat(appletArgs, passedArgs));
     } else {

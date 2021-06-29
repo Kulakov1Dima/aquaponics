@@ -1,3 +1,3 @@
-transparencyON
-lightTheme
+transparencyOFF
+darkTheme
 true
