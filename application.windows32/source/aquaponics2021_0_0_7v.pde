@@ -6,11 +6,8 @@ byte secondScreen = 0;
 
 void setup() {
   fullScreen();
+  //size(displayWidth,displayHeight);
   loading();
-  if (setupRXTX()) {
-    thread("rx");
-    thread("tx");
-  }
   thread("clickingTile");
   thread("controllButtons");
 }

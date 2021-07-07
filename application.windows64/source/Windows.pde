@@ -6,7 +6,6 @@ void clickingTile() {
         if (loadStrings("configuration.txt")[0].equals("transparencyON"))secondScreen=12;
         else secondScreen=0;
     }
-    delay(2);
   }
 }
 void definingWindows() { 
@@ -20,7 +19,10 @@ void definingWindows() {
     if (secondScreen!=12) {
       fill(255);
       rect(sizeTilesX((byte)12), sizeTilesY((byte)12), sizeTilesW((byte)12), sizeTilesH((byte)12));
-      tiles();
+      if (mouseX>sizeTilesX((byte)12)&&mouseY>sizeTilesY((byte)12)&&mouseX<sizeTilesW((byte)12)+sizeTilesX((byte)12)&&mouseY<sizeTilesH((byte)12)+sizeTilesY((byte)12))tileTransparency=170;
+      else tileTransparency=225;
+      tint(tileTransparency);
+      image(tiles[11], sizeTilesX((byte)12), sizeTilesY((byte)12), sizeTilesW((byte)12), sizeTilesH((byte)12));
     }
   }
   if (secondScreen==7)panelSettings();

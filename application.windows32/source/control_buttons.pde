@@ -11,12 +11,10 @@ void controllButtons() {
           else writeData="M0"+(x-7);
           for(int v=0; v<=5;v++){
             serial.write(writeData);
-            delay(2);
           }
           w=false;
         }
       }
     }
-    delay(1);
   }
 }

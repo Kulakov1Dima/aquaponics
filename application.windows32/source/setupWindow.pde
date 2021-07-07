@@ -1,11 +1,10 @@
 boolean startWindow = true;
 boolean n;
-int in=0;
+byte in=0;
 int tileTransparency=100;
 
 PrintWriter output;
 String[] textLines;
-int i=0;
 int k=0;
 
 void setupWindow() {
@@ -62,18 +61,12 @@ void  windowEffects() {
 }
 
 void tiles() {
-  for (byte x=1; x<13; x++) {
+  for (byte x=1; x<12; x++) {
     if (mouseX>sizeTilesX(x)&&mouseY>sizeTilesY(x)&&mouseX<sizeTilesW(x)+sizeTilesX(x)&&mouseY<sizeTilesH(x)+sizeTilesY(x))tileTransparency=170;
     else tileTransparency=225;
     if (!startWindow)tint(255, tileTransparency);
-    if (secondScreen==0&& x!=12) if (load.equals("lightTheme"))image(Ltiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
+    if (load.equals("lightTheme"))image(Ltiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
     else image(tiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
-    else { 
-      if (secondScreen!=0)if (secondScreen!=7)if (load.equals("lightTheme"))image(Ltiles[11], sizeTilesX((byte)12), sizeTilesY((byte)12), sizeTilesW((byte)12), sizeTilesH((byte)12));
-      else image(tiles[11], sizeTilesX((byte)12), sizeTilesY((byte)12), sizeTilesW((byte)12), sizeTilesH((byte)12));
-      if (secondScreen==7&& x!=12) if (load.equals("lightTheme"))image(Ltiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
-      else image(tiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
-    }
   }
 }
 
@@ -91,7 +84,7 @@ void panelSettings() {
   buttonSettings(); 
   transparencyButton();
   themeButton();
-}
+  }
 void buttonSettings() {
   image (transparency, width/45, height/7-height/130, width/17, height/10-height/210);
   image (transparency, width/45, height/4-height/250, width/17, height/10-height/210);
@@ -185,13 +178,19 @@ void icons() {
   if (data!="no data available") {
     if (load.equals("darkTheme"))fill(10);
     else fill(255);
-    if (data.split("N").length>1)text(data.split("N")[1], width/5-width/200, height/3+height/25);
-    if (data.split("N").length>2)text(data.split("N")[2], width/2-width/100, height/3+height/25);
-    if (data.split("N").length>3)text(data.split("N")[3], width/2+width/4+width/50, height/3+height/25);
-    if (data.split("N").length>4)text(data.split("N")[4], width/5-width/200, height/2+height/8);
+    if (data.split("N").length>1)if (data.split("N")[1].split(" ").length>1)text(data.split("N")[1].split(" ")[1], width/5-width/35, height/3+height/25);
+    if (data.split("N").length>2)if (data.split("N")[2].split(" ").length>1)text(data.split("N")[2].split(" ")[1], width/2-width/100, height/3+height/25);
+    if (data.split("N").length>3)if (data.split("N")[3].split(" ").length>1)text(data.split("N")[3].split(" ")[1], width/2+width/4+width/50, height/3+height/25);
+    if (data.split("N").length>4)if (data.split("N")[4].split(" ").length>1){textSize(width/5/(data.split("N")[4].split(" ")[1].length()));
+    if (data.split("N").length>4)if (data.split("N")[4].split(" ").length>1)text(data.split("N")[4].split(" ")[1],width/3/(data.split("N")[4].split(" ")[1].length())+width/8, height/2+height/8);
+    }
+    textSize(width/25);
     if (data.split("N").length>5)text(data.split("N")[5], width/2-width/80, height/2+height/11);
     if (data.split("N").length>6)text(data.split("N")[6], width/2-width/80, height/2+height/6);
-    if (data.split("N").length>7)text(data.split("N")[7], width/2+width/4+width/50, height/2+height/8);
+    if (data.split("N").length>7)if (data.split("N")[7].split(" ").length>1){
+    textSize(width/5/(data.split("N")[7].split(" ")[1].length()));
+    if (data.split("N").length>7)text(data.split("N")[7].split(" ")[1], width/2+width/4, height/2+height/8);
+    }
     textSize(width/50);
     if (data.split("N").length>8)text(data.split("N")[8], width/2-width/14, height/2+height/3-height/50);
     if (data.split("N").length>9)text(data.split("N")[9], width/2+width/13, height/2+height/3-height/50);

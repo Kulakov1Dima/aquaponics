@@ -24,11 +24,8 @@ byte secondScreen = 0;
 
 public void setup() {
   
+  //size(displayWidth,displayHeight);
   loading();
-  if (setupRXTX()) {
-    thread("rx");
-    thread("tx");
-  }
   thread("clickingTile");
   thread("controllButtons");
 }
@@ -104,7 +101,6 @@ public void clickingTile() {
         if (loadStrings("configuration.txt")[0].equals("transparencyON"))secondScreen=12;
         else secondScreen=0;
     }
-    delay(2);
   }
 }
 public void definingWindows() { 
@@ -118,7 +114,10 @@ public void definingWindows() {
     if (secondScreen!=12) {
       fill(255);
       rect(sizeTilesX((byte)12), sizeTilesY((byte)12), sizeTilesW((byte)12), sizeTilesH((byte)12));
-      tiles();
+      if (mouseX>sizeTilesX((byte)12)&&mouseY>sizeTilesY((byte)12)&&mouseX<sizeTilesW((byte)12)+sizeTilesX((byte)12)&&mouseY<sizeTilesH((byte)12)+sizeTilesY((byte)12))tileTransparency=170;
+      else tileTransparency=225;
+      tint(tileTransparency);
+      image(tiles[11], sizeTilesX((byte)12), sizeTilesY((byte)12), sizeTilesW((byte)12), sizeTilesH((byte)12));
     }
   }
   if (secondScreen==7)panelSettings();
@@ -126,12 +125,14 @@ public void definingWindows() {
 
 Serial serial;
 
-public boolean setupRXTX() {
+public void setupRXTX() {
   if (Serial.list().length!=0) {
-    serial = new Serial(this, Serial.list()[0], 9600);
-    scanPonics=Serial.list()[0];
-    return (true);
-  } else return (false);
+     if (Serial.list().length-1>=0){
+      serial = new Serial(this, Serial.list()[Serial.list().length-1], 9600);
+      scanPonics=Serial.list()[Serial.list().length-1];
+    thread("rx");
+     }
+  }
 }
 boolean pump[] = new boolean[4];
 boolean w= false;
@@ -146,13 +147,11 @@ public void controllButtons() {
           else writeData="M0"+(x-7);
           for(int v=0; v<=5;v++){
             serial.write(writeData);
-            delay(2);
           }
           w=false;
         }
       }
     }
-    delay(1);
   }
 }
 PImage darkSetupWindow;
@@ -165,6 +164,7 @@ boolean loadT= false;
 
 public void loading() {
   loadingScreen();
+  setupRXTX();
   darkSetupWindow = loadImage ("darkSetupWindow.png");
   lightSetupWindow =loadImage ("lightSetupWindow.png");
   for (byte x=0; x<12; x++)tiles[x]= loadImage ("Tiles"+(int)(x+1)+".png");
@@ -185,7 +185,7 @@ public void loadingScreen() {
   textSize(width/15);
   text("Loading...", width/2-width/7, height/2);
   textSize(width/50);
-  text("Aquaponics 0.0.7", width/2-width/12, height-height/20);
+  text("Aquaponics 0.0.7", width/2-width/12, height-height/10);
 }
 public void rx() {
   while (true) {
@@ -193,8 +193,12 @@ public void rx() {
     if ( serial.available() > 0)received = serial.readStringUntil('\n');
     if (received != null)if (received.replaceAll(" ", "") != "") {
       data =received.replaceAll("\n", "");
-      delay(1);
     }
+    
+    serial.write(writeData);
+    serial.clear();
+    delay(1100);
+    
   }
 }
 
@@ -206,12 +210,11 @@ public void tx() {
 }
 boolean startWindow = true;
 boolean n;
-int in=0;
+byte in=0;
 int tileTransparency=100;
 
 PrintWriter output;
 String[] textLines;
-int i=0;
 int k=0;
 
 public void setupWindow() {
@@ -268,18 +271,12 @@ public void  windowEffects() {
 }
 
 public void tiles() {
-  for (byte x=1; x<13; x++) {
+  for (byte x=1; x<12; x++) {
     if (mouseX>sizeTilesX(x)&&mouseY>sizeTilesY(x)&&mouseX<sizeTilesW(x)+sizeTilesX(x)&&mouseY<sizeTilesH(x)+sizeTilesY(x))tileTransparency=170;
     else tileTransparency=225;
     if (!startWindow)tint(255, tileTransparency);
-    if (secondScreen==0&& x!=12) if (load.equals("lightTheme"))image(Ltiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
+    if (load.equals("lightTheme"))image(Ltiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
     else image(tiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
-    else { 
-      if (secondScreen!=0)if (secondScreen!=7)if (load.equals("lightTheme"))image(Ltiles[11], sizeTilesX((byte)12), sizeTilesY((byte)12), sizeTilesW((byte)12), sizeTilesH((byte)12));
-      else image(tiles[11], sizeTilesX((byte)12), sizeTilesY((byte)12), sizeTilesW((byte)12), sizeTilesH((byte)12));
-      if (secondScreen==7&& x!=12) if (load.equals("lightTheme"))image(Ltiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
-      else image(tiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
-    }
   }
 }
 
@@ -297,7 +294,7 @@ public void panelSettings() {
   buttonSettings(); 
   transparencyButton();
   themeButton();
-}
+  }
 public void buttonSettings() {
   image (transparency, width/45, height/7-height/130, width/17, height/10-height/210);
   image (transparency, width/45, height/4-height/250, width/17, height/10-height/210);
@@ -391,13 +388,19 @@ public void icons() {
   if (data!="no data available") {
     if (load.equals("darkTheme"))fill(10);
     else fill(255);
-    if (data.split("N").length>1)text(data.split("N")[1], width/5-width/200, height/3+height/25);
-    if (data.split("N").length>2)text(data.split("N")[2], width/2-width/100, height/3+height/25);
-    if (data.split("N").length>3)text(data.split("N")[3], width/2+width/4+width/50, height/3+height/25);
-    if (data.split("N").length>4)text(data.split("N")[4], width/5-width/200, height/2+height/8);
+    if (data.split("N").length>1)if (data.split("N")[1].split(" ").length>1)text(data.split("N")[1].split(" ")[1], width/5-width/35, height/3+height/25);
+    if (data.split("N").length>2)if (data.split("N")[2].split(" ").length>1)text(data.split("N")[2].split(" ")[1], width/2-width/100, height/3+height/25);
+    if (data.split("N").length>3)if (data.split("N")[3].split(" ").length>1)text(data.split("N")[3].split(" ")[1], width/2+width/4+width/50, height/3+height/25);
+    if (data.split("N").length>4)if (data.split("N")[4].split(" ").length>1){textSize(width/5/(data.split("N")[4].split(" ")[1].length()));
+    if (data.split("N").length>4)if (data.split("N")[4].split(" ").length>1)text(data.split("N")[4].split(" ")[1],width/3/(data.split("N")[4].split(" ")[1].length())+width/8, height/2+height/8);
+    }
+    textSize(width/25);
     if (data.split("N").length>5)text(data.split("N")[5], width/2-width/80, height/2+height/11);
     if (data.split("N").length>6)text(data.split("N")[6], width/2-width/80, height/2+height/6);
-    if (data.split("N").length>7)text(data.split("N")[7], width/2+width/4+width/50, height/2+height/8);
+    if (data.split("N").length>7)if (data.split("N")[7].split(" ").length>1){
+    textSize(width/5/(data.split("N")[7].split(" ")[1].length()));
+    if (data.split("N").length>7)text(data.split("N")[7].split(" ")[1], width/2+width/4, height/2+height/8);
+    }
     textSize(width/50);
     if (data.split("N").length>8)text(data.split("N")[8], width/2-width/14, height/2+height/3-height/50);
     if (data.split("N").length>9)text(data.split("N")[9], width/2+width/13, height/2+height/3-height/50);

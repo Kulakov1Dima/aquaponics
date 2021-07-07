@@ -4,7 +4,11 @@ void rx() {
     if ( serial.available() > 0)received = serial.readStringUntil('\n');
     if (received != null)if (received.replaceAll(" ", "") != "") {
       data =received.replaceAll("\n", "");
-      delay(1);
     }
+    
+    serial.write(writeData);
+    serial.clear();
+    delay(1100);
+    
   }
 }

@@ -1,10 +1,12 @@
 import processing.serial.*;
 Serial serial;
 
-boolean setupRXTX() {
+void setupRXTX() {
   if (Serial.list().length!=0) {
-    serial = new Serial(this, Serial.list()[0], 9600);
-    scanPonics=Serial.list()[0];
-    return (true);
-  } else return (false);
+     if (Serial.list().length-1>=0){
+      serial = new Serial(this, Serial.list()[Serial.list().length-1], 9600);
+      scanPonics=Serial.list()[Serial.list().length-1];
+    thread("rx");
+     }
+  }
 }
