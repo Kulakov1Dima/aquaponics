@@ -15,12 +15,19 @@ https://drive.google.com/drive/folders/1hquwaGNRQLUMtP3A7PnKTc_IWKb9ypfk?usp=sha
 # Installation
 Aquaponics- является портативной программой.
 1.  Следует скачать и распоковать архив:
+
 application.windows64 - для Microsoft Windows 64х.
+
 application.windows32 - для Microsoft Windows 32/64x.
+
 application.linux64 - для Linux дистрибутивов 64х.
+
 application.linux32 - для Linux дистрибутивов 32х.
+
 application.linux-armv6hf - Raspberry Pi OS.
+
 application.linux-arm64 - Linux ARM.
+
 2.  Исполняемый файл находится в распокованной папке:
 aquaponics2021_0_0_8v.exe - Microsoft Windows 32/64x.
 aquaponics2021_0_0_8v - Linux системы
