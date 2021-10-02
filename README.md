@@ -4,7 +4,9 @@
 
 # System requirements
 Java - jre1.8.0 и выше (для 32-bit - 32/64-разрядная версия, а 64-bit - только 64-разрядная).
+
 OS - Microsoft Windows, любой дистрибутив Linux (должны поддерживать версию jre, указанную выше).
+
 RAM - 512 мБ и больше.
 
 # Download
