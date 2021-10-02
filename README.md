@@ -29,11 +29,19 @@ Aquaponics- является портативной программой.
     application.linux-arm64 - Linux ARM.
 
 2.  Исполняемый файл находится в распокованной папке:
+
     aquaponics2021_0_0_8v.exe - Microsoft Windows 32/64x.
+    
     aquaponics2021_0_0_8v - Linux системы
+    
 3. Примечание:
+
     В случае отсутствия запуска в Linux системах требуется установить Processing
+    
     https://processing.org/download
+    
     В Raspberry Pi OS
+    
     https://pi.processing.org/download/
+    
 4.  Готово
