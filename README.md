@@ -12,7 +12,7 @@ RAM - 512 мБ и больше.
 # Download
 https://drive.google.com/drive/folders/1hquwaGNRQLUMtP3A7PnKTc_IWKb9ypfk?usp=sharing
 
-#Installation
+# Installation
 Aquaponics- является портативной программой.
 1.  Следует скачать и распоковать архив:
 application.windows64 - для Microsoft Windows 64х.
