@@ -21,6 +21,7 @@ void loop() {
     pH();
   }
 }
+...
 
 void step1() {
   DO.send_read_cmd();
