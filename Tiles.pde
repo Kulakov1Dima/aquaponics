@@ -60,12 +60,12 @@ int sizeTilesH(byte number) {
 void tiles() {
   fill(255);
   stroke(255);
-  tint(255, 210);
+  tint(255, 222);
   for (byte x=1; x<12; x++) {
     if (secondScreen!=7)if (mouseX>sizeTilesX(x)&&mouseY>sizeTilesY(x)&&mouseX<sizeTilesW(x)+sizeTilesX(x)&&mouseY<sizeTilesH(x)+sizeTilesY(x)) {
       rect(sizeTilesX(x), sizeTilesY(x), sizeTilesW(x)-3, sizeTilesH(x)-3,20);
       tint(255, 120);
-    } else tint(255, 210);
+    } else tint(255, 222);
     image(tiles[x-1], sizeTilesX(x), sizeTilesY(x), sizeTilesW(x), sizeTilesH(x));
   }
 }

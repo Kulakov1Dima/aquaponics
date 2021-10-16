@@ -10,3 +10,21 @@ void pH() {
   Serial.println();
   delay(60);
 }
+void conductivity() {
+  Serial.print("E");
+  receive_and_print_reading(EC);
+  Serial.println();
+  delay(60);
+}
+void temperature() {
+  Serial.print("T");
+  receive_and_print_reading(RTD);
+  Serial.println();
+  delay(60);
+}
+void co2() {
+  Serial.print("O");
+  receive_and_print_reading(ORP);
+  Serial.println();
+  delay(60);
+}

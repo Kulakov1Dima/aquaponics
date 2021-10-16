@@ -12,6 +12,7 @@ void setupRXTX() {
         serial = new Serial(this, Serial.list()[port], 250000);
         thread("rx");
         thread("tx");
+        port=0;
       }
   }
 }
@@ -34,18 +35,6 @@ void rx() {
 void tx() {
   while (true) {
     serial.write(writeData);
-    if (writeData==8) {
-      secondScreen=0;
-    }
-    if (writeData==9) {
-      secondScreen=0;
-    }
-    if (writeData==10) {
-      secondScreen=0;
-    }
-    if (writeData==11) {
-      secondScreen=0;
-    }
     delay(1000) ;
   }
 }
