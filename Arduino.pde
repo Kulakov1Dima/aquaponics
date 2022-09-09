@@ -29,12 +29,12 @@ void rx() {
         if(readData.charAt(0)=='V')firmwareVersion=readData.substring(1,readData.length()-1);
       }
     }
-    delay(1);
+    delay(100);
   }
 }
 void tx() {
   while (true) {
     serial.write(writeData);
-    delay(1000) ;
+    delay(2000) ;
   }
 }
