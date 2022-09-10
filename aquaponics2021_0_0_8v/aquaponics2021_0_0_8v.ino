@@ -10,11 +10,14 @@
 Sequencer2 Seq(&step1, 500, &step2, 0);
 
 void setup() {
+  Wire.begin();                 //enable I2C port.
+   Seq.reset();                            //initialize the sequencer
   prinVersion();
 }
 
 void loop() {
   if (Serial.available()) {
+    Seq.run();
     data = Serial.read();
     Serial.println(data);//beta
     delay(100);//beta version
