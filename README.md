@@ -17,24 +17,13 @@ OS - Microsoft Windows, любой дистрибутив Linux (должны п
 
 RAM - 512 мБ и больше.
 
-# Download
-https://drive.google.com/drive/folders/1hquwaGNRQLUMtP3A7PnKTc_IWKb9ypfk?usp=sharing
-
 # Installation
 Aquaponics- является портативной программой.
 1.  Следует скачать и распоковать архив:
 
-    application.windows64 - для Microsoft Windows 64х.
+    windows-amd64 - для Microsoft Windows 64х.
 
-    application.windows32 - для Microsoft Windows 32/64x.
-
-    application.linux64 - для Linux дистрибутивов 64х.
-
-    application.linux32 - для Linux дистрибутивов 32х.
-
-    application.linux-armv6hf - Raspberry Pi OS.
-
-    application.linux-arm64 - Linux ARM.
+    linux-arm - Raspberry Pi OS/Linux ARM.
 
 2.  Исполняемый файл находится в распокованной папке:
 
@@ -53,3 +42,27 @@ Aquaponics- является портативной программой.
     https://pi.processing.org/download/
     
 4.  Готово
+
+# Installation in Microsoft Windows 10 or 11
+
+1.  попробуйте запустить aquaponics.exe
+
+2. если увидите такое окошко, после нажатия кнопки вас перекинет на сайт java jdk:
+
+![Снимок экрана 2022-09-10 065011](https://user-images.githubusercontent.com/84613812/189475011-1f1fd7a8-5d41-4c51-a744-59fb6113304a.png)
+
+3. Скачайте последнюю версию
+
+![Снимок экрана 2022-09-10 065120](https://user-images.githubusercontent.com/84613812/189475043-5f739738-92db-4b3a-a490-ac67ba29e22d.png)
+
+4. Запустите установщик java:
+
+![Снимок экрана 2022-09-10 065213](https://user-images.githubusercontent.com/84613812/189475064-a13443f8-7eff-4208-99e7-1544a1c35e01.png)
+
+5. Важно! установите два последних флажка для установки java.
+
+![Снимок экрана 2022-09-10 065308](https://user-images.githubusercontent.com/84613812/189475081-bd640277-0d6e-4bf8-b689-cb6cc8e789ef.png)
+
+6. Готово, можете наслаждаться запуском.
+
+![изображение](https://user-images.githubusercontent.com/84613812/189475103-54509f95-b9f6-4895-ab64-24c7614e10d7.png)
